@@ -61,7 +61,7 @@
 }
 
 .status-chip.warning {
-  background: rgba(192, 86, 33, 0.12);
+  background: rgba(107, 66, 45, 0.12);
   color: var(--warn);
 }
 
