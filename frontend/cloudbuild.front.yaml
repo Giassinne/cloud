@@ -1,0 +1,50 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: frontend
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:${SHORT_SHA}'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:latest'
+      - '--build-arg'
+      - 'API_URL=${_API_URL}'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: frontend
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:${SHORT_SHA}'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: frontend
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:latest'
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE_NAME}'
+      - '--image'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:${SHORT_SHA}'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+
+substitutions:
+  _REGION: europe-west1
+  _REPOSITORY: frontend-app-repo
+  _IMAGE_NAME: cloud-monitor-frontend
+  _SERVICE_NAME: monFront
+  _API_URL: https://monProjet.region.run.app
+
+options:
+  logging: CLOUD_LOGGING_ONLY
