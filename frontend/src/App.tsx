@@ -88,7 +88,7 @@ function App() {
       <div className="glow halo"></div>
       <section className="hero-message">
         <p className="stamp">crafted · 2026</p>
-        <h1 className="yass">Yassine Kaddouri</h1>
+        <h1 className="yass">Yassine </h1>
         <p className="subtitle">bold. minimal. unapologetic.</p>
         <div className="divider" aria-hidden></div>
         <p className="note">Always shipping with style.</p>
