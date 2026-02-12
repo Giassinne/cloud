@@ -1,18 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg: #f8f7f2;
-  --bg-alt: #dfe9ff;
-  --card: rgba(255, 255, 255, 0.92);
-  --ink: #081026;
-  --muted: #4c5773;
-  --border: rgba(8, 16, 38, 0.12);
-  --accent: #ff7b54;
-  --accent-strong: #ed3b3b;
-  --good: #0f996d;
-  --warn: #c05621;
   --sans: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
   --mono: 'IBM Plex Mono', 'Space Grotesk', monospace;
+  --bg-top: #0d0c1d;
+  --bg-bottom: #1f1d47;
 }
 
 * {
@@ -22,8 +14,9 @@
 body {
   margin: 0;
   font-family: var(--sans);
-  background: radial-gradient(circle at top, var(--bg) 20%, var(--bg-alt) 90%);
-  color: var(--ink);
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.1), transparent),
+    linear-gradient(135deg, var(--bg-top), var(--bg-bottom));
+  color: #fff;
   min-height: 100vh;
 }
 
@@ -31,12 +24,7 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  margin: 0 0 12px;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.1;
-}
-
+h1,
 p {
   margin: 0;
 }

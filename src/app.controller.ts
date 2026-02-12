@@ -9,4 +9,12 @@ export class AppController {
   getHealth(): object {
     return this.appService.getHealth();
   }
+
+  @Get('users')
+  getUsers(): object {
+    return {
+      count: this.appService.getUsers().length,
+      items: this.appService.getUsers(),
+    };
+  }
 }

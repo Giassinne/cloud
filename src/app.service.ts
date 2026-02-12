@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { users, UserRecord } from './data/users';
 
 @Injectable()
 export class AppService {
@@ -8,5 +9,9 @@ export class AppService {
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
     };
+  }
+
+  getUsers(): UserRecord[] {
+    return users;
   }
 }
