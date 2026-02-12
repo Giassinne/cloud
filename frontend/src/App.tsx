@@ -47,6 +47,24 @@ function App() {
     }
   }, [apiBase])
 
+  const deleteUser = async (id: number) => {
+    try {
+      const response = await fetch(`${apiBase}/users/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error(`Failed to delete user ${id}`)
+      }
+
+      // Refresh the user list after deletion
+      await syncUsers()
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to delete user')
+      setStatus('error')
+    }
+  }
+
   useEffect(() => {
     syncUsers()
   }, [syncUsers])
@@ -70,7 +88,7 @@ function App() {
       <div className="glow halo"></div>
       <section className="hero-message">
         <p className="stamp">crafted · 2026</p>
-        <h1 className="yass">yass</h1>
+        <h1 className="yass">Yassine Kaddouri</h1>
         <p className="subtitle">bold. minimal. unapologetic.</p>
         <div className="divider" aria-hidden></div>
         <p className="note">Always shipping with style.</p>
@@ -98,6 +116,7 @@ function App() {
             <span role="columnheader">Role</span>
             <span role="columnheader">Location</span>
             <span role="columnheader">Joined</span>
+            <span role="columnheader">Actions</span>
           </div>
 
           {status === 'loading' && (
@@ -124,6 +143,16 @@ function App() {
                 <span className="location-pill">{user.location}</span>
               </span>
               <span role="cell">{formatJoinDate(user.joinedAt)}</span>
+              <span role="cell">
+                <button
+                  type="button"
+                  className="delete-btn"
+                  onClick={() => deleteUser(user.id)}
+                  title={`Delete ${user.name}`}
+                >
+                  delete
+                </button>
+              </span>
             </div>
           ))}
         </div>
