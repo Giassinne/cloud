@@ -161,6 +161,22 @@ button.primary:not(:disabled):hover {
   line-height: 1.6;
 }
 
+.info-panel a {
+  color: var(--accent-strong);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-family: var(--mono);
+  background: rgba(8, 16, 38, 0.06);
+  color: var(--ink);
+}
+
 @media (max-width: 640px) {
   .status-card,
   .panel {

@@ -9,6 +9,7 @@ type HealthPayload = {
 
 const API_BASE_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:3000').replace(/\/$/, '')
 const HEALTH_ENDPOINT = `${API_BASE_URL}/health`
+const FRONT_ORIGIN = typeof window === 'undefined' ? '' : window.location.origin
 
 const dateFormatter = new Intl.DateTimeFormat('fr-FR', {
   dateStyle: 'medium',
@@ -136,6 +137,22 @@ function App() {
             <li>Rechargez la page publique https://monFront.region.run.app.</li>
             <li>Vérifiez que les données ci-dessus reflètent la nouvelle release API.</li>
           </ol>
+        </article>
+        <article className="panel info-panel">
+          <p className="eyebrow">URLs publiques</p>
+          <p className="hint">
+            API santé :{' '}
+            <a href={HEALTH_ENDPOINT} target="_blank" rel="noreferrer">
+              {HEALTH_ENDPOINT}
+            </a>
+          </p>
+          <p className="hint">
+            Front en ligne : <span className="tag-chip">{FRONT_ORIGIN || 'Déploiement en cours...'}</span>
+          </p>
+          <p className="hint">
+            Partagez ces liens pendant la présentation pour montrer que vos triggers Cloud Build livrent
+            bien l’API et l’interface sur Cloud Run.
+          </p>
         </article>
       </section>
     </div>
