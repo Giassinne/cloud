@@ -44,7 +44,7 @@ substitutions:
   _REPOSITORY: frontend-app-repo
   _IMAGE_NAME: cloud-monitor-frontend
   _SERVICE_NAME: mon-front
-  _API_URL: https://monProjet.region.run.app
+  _API_URL: https://nestjs-cloud-app-699523967865.europe-west1.run.app
 
 options:
   logging: CLOUD_LOGGING_ONLY
